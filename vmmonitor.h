@@ -38,7 +38,7 @@ void mon_listdir(char *path);
 void mon_setfile(char *file);
 void mon_getexepath(char *path, char *exepath, size_t size);
 void mon_getpath(char *path, size_t size);
-void mon_assemble(char *file);
+void mon_trap_on_sigint(void);
 void mon_execmon(void);
 
 #endif // _VMMONITOR_H_

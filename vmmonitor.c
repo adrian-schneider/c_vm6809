@@ -818,6 +818,11 @@ void mon_getpath(char *path, size_t size) {
     }
 }
 
+void mon_trap_on_sigint(void) {
+    if (_sigint_received)
+        cpu_regs._trap |= tc_halt;
+}
+
 extern int main_perform_tio;
 
 void mon_execmon(void) {
@@ -834,7 +839,6 @@ void mon_execmon(void) {
 
     if (_sigint_received) {
         _sigint_received = 0;
-        cpu_regs._trap |= tc_halt;
         brkcode = 'H';
     }
 
