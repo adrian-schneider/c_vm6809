@@ -8,6 +8,11 @@
 #include <conio.h>
 #endif // ARCH_WINDOWS
 
+#ifdef ARCH_MACOSX
+#include <termios.h>
+#include <sys/ioctl.h>
+#endif // ARCH_MACOSX
+
 void _assert(int cond, char *message) {
     if (!cond) {
         fprintf(stderr, "*** Assertion failure: %s\n", message);
@@ -63,3 +68,34 @@ int os_getchar_nowait(char *ch) {
     #pragma message("### not implemented")
     #endif // ARCH_WINDOWS
 }
+
+#ifdef ARCH_MACOSX
+static struct termios _term_norm;
+static struct termios _term_raw;
+static uint8_t _term_initialized = 0;
+
+static void _init_term(void) {
+    if (! _term_initialized) {
+      tcgetattr(0, &_term_norm);
+      _term_raw = _term_norm;
+      _term_raw.c_lflag &= (ICANON | ECHO);
+      _term_initialized = 1;
+    }
+}
+
+void os_term_raw(void) {
+    _init_term();
+    tcsetattr(0, TCSANOW, &_term_raw);
+#ifdef DEBUG_VM6809
+    puts("DBG:term_raw");
+#endif // DEBUG_VM6809
+}
+
+void os_term_norm(void) {
+    _init_term();
+    tcsetattr(0, TCSANOW, &_term_norm);
+    #ifdef DEBUG_VM6809
+        puts("DBG:term_norm");
+    #endif // DEBUG_VM6809
+}
+#endif // ARCH_MACOSX

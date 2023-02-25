@@ -24,9 +24,22 @@
 #pragma message("### Building for Apple MacOSX.")
 #endif // __APPLE__
 
+
 void os_sprintf(char *buf, size_t bufsize, const char* fmt, ...);
 
 void os_clear_input();
 int os_getchar_nowait(char *ch);
+
+#ifdef ARCH_MACOSX
+#define OS_TERM_RAW os_term_raw()
+void os_term_raw(void);
+
+#define OS_TERM_NORM os_term_norm()
+void os_term_norm(void);
+
+#else
+#define OS_TERM_RAW ;
+#define OS_TERM_NORM ;
+#endif // ARCH_MACOSX
 
 #endif // _OS_H_

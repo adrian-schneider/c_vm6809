@@ -292,7 +292,7 @@ static uint16_t *_pregfromc16(char c) {
 void mon_read(char *file, uint16_t start) {
     int bytes_read = mon_read_bin(file, start);
     if (bytes_read) {
-        printf("  Read %d bytes.\n  from %s\n  to %04x\n",
+        printf("  Read %d bytes\n  from %s\n  to %04x\n",
                bytes_read, file, start);
         mem_wr16(0xfffe, start);
     }
@@ -777,7 +777,7 @@ void mon_listdir(char *path) {
     char cmd[CMD_LINE_LENGTH];
     os_sprintf(cmd, sizeof(cmd), CMD_LIST_FILES, path);
 #ifdef DEBUG_VM6809
-    printf("''%s''\n", cmd);
+    printf("DBG:system ''%s''\n", cmd);
 #endif // DEBUG_VM6809
     system(cmd);
     puts("");
@@ -849,6 +849,8 @@ void mon_execmon(void) {
     }
 
     if (_is_halt_or_step()) {
+        OS_TERM_NORM;
+
         os_clear_input();
         puts("");
         sprintf(cmdprmpt, "%c@%04x>", brkcode?brkcode:'_', cpu_regs.pc);
@@ -861,5 +863,7 @@ void mon_execmon(void) {
         }
         main_perform_tio = 1;
         brkcode = '\0';
+
+        OS_TERM_RAW;
     }
 }

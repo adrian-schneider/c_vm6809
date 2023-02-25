@@ -1,4 +1,4 @@
-CFLAGS = -W\#pragma-messages
+CFLAGS = -W\#pragma-messages -DDEBUG_VM6809
 CC = cc $(CFLAGS)
 
 vm6809:		main.c vm6809.o vmmemory.o vmtermio.o vmmonitor.o os.o

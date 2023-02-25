@@ -56,6 +56,10 @@ static void _welcome(void) {
     // puts(" `8bd8'  88  88  88 88' `8D 88   8D `88  d8'   d8'   ");
     // puts("   YP    YP  YP  YP `8888P  `Y888P'  `Y88P'   d8'    ");
 
+#ifdef DEBUG_VM6809
+    puts("Debug");
+#endif // DEBUG_VM6809
+
     puts("");
 }
 
