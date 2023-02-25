@@ -66,3 +66,72 @@
 	<stdlib.h>
 	<conio.h>
 
+1677337749 source:c:\users\asc\documents\c_vm6809\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<string.h>
+	<errno.h>
+	"os.h"
+	"vm6809.h"
+	"vmmemory.h"
+	"vmmonitor.h"
+	"vmtermio.h"
+
+1677337749 c:\users\asc\documents\c_vm6809\os.h
+	<stdarg.h>
+	<stdint.h>
+	<ctype.h>
+
+1677337749 c:\users\asc\documents\c_vm6809\vm6809.h
+
+1677337749 c:\users\asc\documents\c_vm6809\vmmemory.h
+
+1677337749 c:\users\asc\documents\c_vm6809\vmmonitor.h
+
+1677337749 c:\users\asc\documents\c_vm6809\vmtermio.h
+
+1677337749 source:c:\users\asc\documents\c_vm6809\os.c
+	"os.h"
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<conio.h>
+	<termios.h>
+	<sys/ioctl.h>
+
+1677337749 source:c:\users\asc\documents\c_vm6809\vm6809.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<string.h>
+	"vm6809.h"
+	"vmmemory.h"
+
+1677337749 source:c:\users\asc\documents\c_vm6809\vmmemory.c
+	<stdint.h>
+	<string.h>
+	"vmmemory.h"
+	"vmtermio.h"
+
+1677337749 source:c:\users\asc\documents\c_vm6809\vmmonitor.c
+	<stdint.h>
+	<signal.h>
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<ctype.h>
+	"os.h"
+	"vmmonitor.h"
+	"vm6809.h"
+	"vmmemory.h"
+
+1677337749 source:c:\users\asc\documents\c_vm6809\vmtermio.c
+	<stdint.h>
+	<ctype.h>
+	<stdio.h>
+	"os.h"
+	"vm6809.h"
+	"vmtermio.h"
+	"vmmemory.h"
+
