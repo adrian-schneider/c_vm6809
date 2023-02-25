@@ -1,7 +1,3 @@
-#include <termios.h>
-#include <stdio.h>
-
-
 int mygetch() {
     char ch;
     int error;
@@ -47,3 +43,4 @@ int mygetch() {
 
     return (error == 1 ? (int) ch : -1 );
 }
+

@@ -27,11 +27,11 @@
 #define MON_CLEAR_BREAKPOINT 0
 #define MON_SET_BREAKPOINT 1
 
-typedef enum {
+typedef enum _breakpoint_status {
     bps_enabled=128, bps_set=64
 } _breakpoint_status;
 
-typedef struct {
+typedef struct _breakpoint_struct {
     uint16_t address;
     uint8_t status;
 } _breakpoint_struct;
@@ -59,7 +59,7 @@ static void _inst_signal_handler() {
 
 void mon_init(void) {
     memset(&monitor, 0, sizeof(monitor));
-    monitor.flags = mf_halt;
+    cpu_regs._trap = tc_halt;
     monitor.m_chunk = 64;
     _inst_signal_handler();
 }
@@ -322,23 +322,23 @@ static uint8_t _is_print_hdr(int *plines) {
 
 static void _printreg_short(int *plines) {
     mon_printreg_short(_is_print_hdr(plines));
-    *plines = (monitor.flags&mf_step)?0:*plines+1;
+    *plines = (cpu_regs._trap&tc_step)?0:*plines+1;
 }
 
-static uint8_t _is_trace_step(void) {
-    return monitor.flags&(mf_trace|mf_step);
+static uint8_t _is_trace_or_step(void) {
+    return cpu_regs._trap&(tc_trace|tc_step);
 }
 
 static uint8_t _is_trace_only(void) {
-    return _is_trace_step() == mf_trace;
+    return _is_trace_or_step() == tc_trace;
 }
 
-static uint8_t _is_halt_step(void) {
-    return monitor.flags&(mf_halt|mf_step);
+static uint8_t _is_halt_or_step(void) {
+    return cpu_regs._trap&(tc_halt|tc_step);
 }
 
 static int _execcmd_g(char *cmdline, int *plines) {
-    monitor.flags &= ~(mf_halt|mf_step);
+    cpu_regs._trap &= ~(tc_halt|tc_step);
     if (cmdline[0]) {
         cpu_regs.pc = _getval(cmdline);
         printf("  Run:%04x\n", cpu_regs.pc);
@@ -387,18 +387,18 @@ static void _showset(char *name, uint8_t set) {
 
 static void _execcmd_t(char *cmdline) {
     if (cmdline[0] == CMDOPT_SET) {
-        monitor.flags |= mf_trace;
+        cpu_regs._trap |= tc_trace;
     }
     else if (cmdline[0] == CMDOPT_CLEAR) {
-        monitor.flags &= ~mf_trace;
+        cpu_regs._trap &= ~tc_trace;
     }
-    _showset("trace", monitor.flags&mf_trace);
+    _showset("trace", cpu_regs._trap&tc_trace);
 }
 
 static int _execcmd_s(char *cmdline, int *plines) {
     int leave = 1;
-    monitor.flags &= ~mf_halt;
-    monitor.flags |= mf_step;
+    cpu_regs._trap &= ~tc_halt;
+    cpu_regs._trap |= tc_step;
     if (cmdline[0]) {
         cpu_regs.pc = _getval(cmdline);
         printf("  Step:%04x\n", cpu_regs.pc);
@@ -818,6 +818,8 @@ void mon_getpath(char *path, size_t size) {
     }
 }
 
+extern int main_perform_tio;
+
 void mon_execmon(void) {
     static int lines = 0;
     static char cmdline[CMD_LINE_LENGTH+1];
@@ -825,28 +827,28 @@ void mon_execmon(void) {
     static char brkcode = '\0';
 
     if (cpu_status.code != sc_ok) {
-        monitor.flags |= mf_halt;
+        cpu_regs._trap |= tc_halt;
         cpu_status.code = sc_ok;
         brkcode = 'E';
     }
 
     if (_sigint_received) {
         _sigint_received = 0;
-        monitor.flags |= mf_halt;
+        cpu_regs._trap |= tc_halt;
         brkcode = 'H';
     }
 
     if (_breakpoint_hit(cpu_regs.pc)) {
-        monitor.flags |= mf_halt;
+        cpu_regs._trap |= tc_halt;
         brkcode = 'B';
     }
 
-    if (_is_trace_step()) {
+    if (_is_trace_or_step()) {
         if (_is_trace_only() & _is_print_hdr(&lines)) putchar('\n');
         _printreg_short(&lines);
     }
 
-    if (_is_halt_step()) {
+    if (_is_halt_or_step()) {
         os_clear_input();
         puts("");
         sprintf(cmdprmpt, "%c@%04x>", brkcode?brkcode:'_', cpu_regs.pc);
@@ -857,6 +859,7 @@ void mon_execmon(void) {
                 leave = _execcmd(cmdline, &lines);
             }
         }
+        main_perform_tio = 1;
         brkcode = '\0';
     }
 }

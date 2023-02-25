@@ -134,5 +134,5 @@ static void _internal_loopback(void) {
 void tio_exec(void) {
     _recvc();
     _sendc();
-    _internal_loopback();
+    //_internal_loopback();
 }

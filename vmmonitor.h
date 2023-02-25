@@ -1,10 +1,6 @@
 #ifndef _VMMONITOR_H_
 #define _VMMONITOR_H_
 
-typedef enum {
-    mf_halt=128, mf_trace=64, mf_step=32
-} monitor_flags;
-
 #define NUMBER_OF_BREAK_POINTS 4 /* maximum 16 as b_enables is 16 bit. */
 #define TRACE_PAGE_LINES 25
 #define CMD_LINE_LENGTH 80
@@ -22,7 +18,6 @@ typedef struct monitor_state {
     uint16_t b_enabled;
     uint16_t m_address;
     uint16_t m_chunk;
-    uint8_t flags;
     uint16_t l_start;
     char l_file[CMD_LINE_LENGTH];
     char l_path[CMD_LINE_LENGTH];

@@ -7,7 +7,7 @@
 #define CPU_TRANSFER 0
 #define CPU_TRANSFER_SWAP 1
 
-typedef enum {
+typedef enum cpu_status_code {
     sc_ok=0
     , sc_invalid_opcode
     , sc_invalid_postcode
@@ -21,13 +21,20 @@ typedef enum {
     , sc_unsupported_opcode
 } cpu_status_code;
 
-typedef struct {
+typedef enum cpu_trap_code {
+    tc_halt=128   /* Halt by user request. */
+    , tc_trap=64  /* Halt by CPU request. */
+    , tc_trace=32 /* Monitor trace mode. */
+    , tc_step=16  /* Monitor single stepping mode. */
+} cpu_trap_code;
+
+typedef struct cpu_machine_status {
     cpu_status_code code;
 } cpu_machine_status;
 
 cpu_machine_status cpu_status;
 
-typedef struct {
+typedef struct cpu_registers_6809 {
     uint16_t x;
     uint16_t y;
     uint16_t u;
@@ -43,15 +50,16 @@ typedef struct {
     uint8_t dp;
     uint8_t cc;
     uint8_t _irq; /* Interrupt request flags */
+    uint8_t _trap; /* CPU status and monitor control. */
 } cpu_registers_6809;
 
 cpu_registers_6809 cpu_regs;
 
-typedef enum {
+typedef enum cpu_ccflags_6809 {
     cc_e=128, cc_f=64, cc_h=32, cc_i=16, cc_n=8, cc_z=4, cc_v=2, cc_c=1
 } cpu_ccflags_6809;
 
-typedef enum {
+typedef enum cpu_irqflags_6809 {
     irq_rst=128, irq_irq=64, irq_firq=32, irq_nmi=16, irq_swi=8, irq_swi2=4,
     irq_swi3=2
 } cpu_irqflags_6809;

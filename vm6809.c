@@ -395,6 +395,7 @@ void _errorexit(int code, char *text, char *filename, int linenumber, char *func
         printf("Location: %s(%d):%s\n\n", filename, linenumber, func);
     }
     cpu_status.code = code;
+    cpu_regs._trap = tc_trap;
 }
 
 void _assert_a_b_d_union(void) {
