@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<FileVersion major="1" minor="0" />
+	<ActiveTarget name="Debug" />
+	<File name="main.c" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1018" topLine="13" />
+		</Cursor>
+	</File>
+	<File name="os.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="505" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="vm6809.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1320" topLine="22" />
+		</Cursor>
+	</File>
+	<File name="vmtermio.c" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2546" topLine="89" />
+		</Cursor>
+	</File>
+	<File name="vm6809.c" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="38247" topLine="555" />
+		</Cursor>
+		<Folding>
+			<Collapse line="11" />
+			<Collapse line="310" />
+			<Collapse line="360" />
+			<Collapse line="374" />
+			<Collapse line="381" />
+			<Collapse line="385" />
+			<Collapse line="391" />
+			<Collapse line="399" />
+			<Collapse line="469" />
+			<Collapse line="477" />
+			<Collapse line="485" />
+			<Collapse line="505" />
+			<Collapse line="523" />
+			<Collapse line="545" />
+			<Collapse line="558" />
+			<Collapse line="573" />
+			<Collapse line="577" />
+			<Collapse line="582" />
+			<Collapse line="594" />
+			<Collapse line="602" />
+			<Collapse line="612" />
+			<Collapse line="622" />
+			<Collapse line="648" />
+			<Collapse line="669" />
+			<Collapse line="696" />
+			<Collapse line="727" />
+			<Collapse line="760" />
+			<Collapse line="763" />
+			<Collapse line="793" />
+			<Collapse line="801" />
+			<Collapse line="805" />
+			<Collapse line="809" />
+			<Collapse line="817" />
+			<Collapse line="892" />
+			<Collapse line="898" />
+			<Collapse line="904" />
+			<Collapse line="911" />
+			<Collapse line="974" />
+			<Collapse line="1064" />
+			<Collapse line="1174" />
+			<Collapse line="1776" />
+			<Collapse line="1821" />
+		</Folding>
+	</File>
+	<File name="vmmonitor.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="102" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="vmmonitor.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="238" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="vmmemory.c" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="113" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="vmmemory.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="135" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="vmtermio.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1621" topLine="5" />
+		</Cursor>
+	</File>
+	<File name="os.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1068" topLine="12" />
+		</Cursor>
+	</File>
+</CodeBlocks_layout_file>

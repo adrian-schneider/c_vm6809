@@ -1,0 +1,68 @@
+# depslib dependency file v1.0
+1676786667 source:c:\users\asc\documents\vm6809\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<string.h>
+	<errno.h>
+	"os.h"
+	"vm6809.h"
+	"vmmemory.h"
+	"vmmonitor.h"
+	"vmtermio.h"
+
+1676221808 source:c:\users\asc\documents\vm6809\vm6809.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<string.h>
+	"vm6809.h"
+	"vmmemory.h"
+
+1676112880 c:\users\asc\documents\vm6809\vm6809.h
+
+1676785586 source:c:\users\asc\documents\vm6809\vmmonitor.c
+	<stdint.h>
+	<signal.h>
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<ctype.h>
+	"os.h"
+	"vmmonitor.h"
+	"vm6809.h"
+	"vmmemory.h"
+
+1676112974 c:\users\asc\documents\vm6809\vmmonitor.h
+
+1676112880 c:\users\asc\documents\vm6809\vmmemory.h
+
+1676112880 source:c:\users\asc\documents\vm6809\vmmemory.c
+	<stdint.h>
+	<string.h>
+	"vmmemory.h"
+	"vmtermio.h"
+
+1676112734 c:\users\asc\documents\vm6809\vmtermio.h
+
+1676717096 source:c:\users\asc\documents\vm6809\vmtermio.c
+	<stdint.h>
+	<ctype.h>
+	<stdio.h>
+	"os.h"
+	"vm6809.h"
+	"vmtermio.h"
+	"vmmemory.h"
+
+1676788543 c:\users\asc\documents\vm6809\os.h
+	<stdarg.h>
+	<stdint.h>
+	<ctype.h>
+
+1676788546 source:c:\users\asc\documents\vm6809\os.c
+	"os.h"
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<conio.h>
+
