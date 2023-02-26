@@ -26,7 +26,7 @@
 
 
 void os_sprintf(char *buf, size_t bufsize, const char* fmt, ...);
-
+void os_clear_screen(void);
 void os_clear_input();
 int os_getchar_nowait(char *ch);
 

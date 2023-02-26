@@ -41,6 +41,14 @@ void os_sprintf(char *buf, size_t bufsize, const char* fmt, ...) {
     _assert((ret >= 0) && (ret < bufsize), "sprintf buffer too short.");
 }
 
+void os_clear_screen(void) {
+#ifdef ARCH_WINDOWS
+    system("cls");
+#else
+    system("clear");
+#endif // ARCH_WINDOWS
+}
+
 void os_clear_input() {
     #ifdef ARCH_WINDOWS
     while (_kbhit()) _getche();
@@ -62,7 +70,12 @@ int os_getchar_nowait(char *ch) {
     return 0;
 
     #elif defined ARCH_MACOSX
-    #pragma message("### not implemented")
+    int bytesWaiting;
+    ioctl(0, FIONREAD, &bytesWaitng);
+    if (bytesWaiting) {
+        read(0, %ch, 1);
+        return 1;
+    }
 
     #else
     #pragma message("### not implemented")

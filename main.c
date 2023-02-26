@@ -42,24 +42,16 @@ VM6809_DEFAULT_FILE=\"6809.bin\"
 int main_perform_tio = 0;
 
 static void _welcome(void) {
+    os_clear_screen();
     puts("                   __   ___   ___   ___  ");
     puts("                  / /  / _ \\ / _ \\ / _ \\ ");
     puts("__   ___ __ ___  / /_ | (_) | | | | (_) |");
     puts("\\ \\ / / '_ ` _ \\| '_ \\ > _ <| | | |\\__, |");
     puts(" \\ V /| | | | | | (_) | (_) | |_| |  / / ");
     puts("  \\_/ |_| |_| |_|\\___/ \\___/ \\___/  /_/  ");
-
-    // puts("db    db .88b  d88.    dD   .d888b.  .d88b.  .d888b. ");
-    // puts("88    88 88'YbdP`88   d8'   88   8D .8P  88. 88' `8D ");
-    // puts("Y8    8P 88  88  88  d8'    `VoooY' 88  d'88 `V8o88' ");
-    // puts("`8b  d8' 88  88  88 d8888b. .d~~~b. 88 d' 88    d8'  ");
-    // puts(" `8bd8'  88  88  88 88' `8D 88   8D `88  d8'   d8'   ");
-    // puts("   YP    YP  YP  YP `8888P  `Y888P'  `Y88P'   d8'    ");
-
 #ifdef DEBUG_VM6809
     puts("Debug");
 #endif // DEBUG_VM6809
-
     puts("");
 }
 
