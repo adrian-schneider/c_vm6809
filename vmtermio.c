@@ -103,9 +103,9 @@ static void _sendc(void) {
         char cc = regs.thr;
         regs.lsr |= xxr_thr_empty;
         _generate_interrupt(xxr_thr_empty);
-        putchar(cc);
+        os_putchar_nowait(cc);
         if (cc == '\r') {
-            putchar('\n');
+            os_putchar_nowait('\n');
         }
     }
 }

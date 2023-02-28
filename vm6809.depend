@@ -66,7 +66,7 @@
 	<stdlib.h>
 	<conio.h>
 
-1677337749 source:c:\users\asc\documents\c_vm6809\main.c
+1677400888 source:c:\users\asc\documents\c_vm6809\main.c
 	<stdio.h>
 	<stdlib.h>
 	<stdint.h>
@@ -78,7 +78,7 @@
 	"vmmonitor.h"
 	"vmtermio.h"
 
-1677400338 c:\users\asc\documents\c_vm6809\os.h
+1677609655 c:\users\asc\documents\c_vm6809\os.h
 	<stdarg.h>
 	<stdint.h>
 	<ctype.h>
@@ -91,7 +91,7 @@
 
 1677337749 c:\users\asc\documents\c_vm6809\vmtermio.h
 
-1677400395 source:c:\users\asc\documents\c_vm6809\os.c
+1677610047 source:c:\users\asc\documents\c_vm6809\os.c
 	"os.h"
 	<stdio.h>
 	<string.h>
@@ -126,7 +126,7 @@
 	"vm6809.h"
 	"vmmemory.h"
 
-1677337749 source:c:\users\asc\documents\c_vm6809\vmtermio.c
+1677610074 source:c:\users\asc\documents\c_vm6809\vmtermio.c
 	<stdint.h>
 	<ctype.h>
 	<stdio.h>

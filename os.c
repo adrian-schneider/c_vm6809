@@ -70,12 +70,7 @@ int os_getchar_nowait(char *ch) {
     return 0;
 
     #elif defined ARCH_MACOSX
-    int bytesWaiting;
-    ioctl(0, FIONREAD, &bytesWaitng);
-    if (bytesWaiting) {
-        read(0, %ch, 1);
-        return 1;
-    }
+    return read(_fd_stdin, &ch, 1) == 1;
 
     #else
     #pragma message("### not implemented")
@@ -85,20 +80,40 @@ int os_getchar_nowait(char *ch) {
 #ifdef ARCH_MACOSX
 static struct termios _term_norm;
 static struct termios _term_raw;
+static int _fd_stdin;
+static int _fd_stdout;
 static uint8_t _term_initialized = 0;
+#endif // ARCH_MACOSX
 
+void os_putchar_nowait(char ch) {
+    #ifdef ARCH_WINDOWS
+    putchar(ch);
+
+    #elif defined ARCH_MACOSX
+    write(_fd_stdout, &ch, 1)
+
+    #else
+    #pragma message("### not implemented")
+    #endif // ARCH_WINDOWS
+}
+
+#ifdef ARCH_MACOSX
 static void _init_term(void) {
     if (! _term_initialized) {
-      tcgetattr(0, &_term_norm);
-      _term_raw = _term_norm;
-      _term_raw.c_lflag &= (ICANON | ECHO);
-      _term_initialized = 1;
+        _fd_stdin = fileno(stdin);
+        _fd_stdout = fileno(stdout);
+        tcgetattr(_fd_stdin, &_term_norm);
+        _term_raw = _term_norm;
+        _term_raw.c_lflag &= ~(ICANON | ECHO);
+        _term_raw.c_cc[VMIN] = 0;
+        _term_raw.c_cc[VTIME] = 0;
+        _term_initialized = 1;
     }
 }
 
 void os_term_raw(void) {
     _init_term();
-    tcsetattr(0, TCSANOW, &_term_raw);
+    tcsetattr(_fd_stdin, TCSANOW, &_term_raw);
 #ifdef DEBUG_VM6809
     puts("DBG:term_raw");
 #endif // DEBUG_VM6809
@@ -106,7 +121,7 @@ void os_term_raw(void) {
 
 void os_term_norm(void) {
     _init_term();
-    tcsetattr(0, TCSANOW, &_term_norm);
+    tcsetattr(_fd_stdin, TCSANOW, &_term_norm);
     #ifdef DEBUG_VM6809
         puts("DBG:term_norm");
     #endif // DEBUG_VM6809

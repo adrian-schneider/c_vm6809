@@ -29,6 +29,7 @@ void os_sprintf(char *buf, size_t bufsize, const char* fmt, ...);
 void os_clear_screen(void);
 void os_clear_input();
 int os_getchar_nowait(char *ch);
+void os_putchar_nowait(char ch);
 
 #ifdef ARCH_MACOSX
 #define OS_TERM_RAW os_term_raw()
