@@ -11,6 +11,7 @@
 #ifdef ARCH_MACOSX
 #include <termios.h>
 #include <sys/ioctl.h>
+#include <unistd.h>
 #endif // ARCH_MACOSX
 
 void _assert(int cond, char *message) {
@@ -61,6 +62,14 @@ void os_clear_input() {
     #endif // ARCH_WINDOWS
 }
 
+#ifdef ARCH_MACOSX
+static struct termios _term_norm;
+static struct termios _term_raw;
+static int _fd_stdin;
+static int _fd_stdout;
+static uint8_t _term_initialized = 0;
+#endif // ARCH_MACOSX
+
 int os_getchar_nowait(char *ch) {
     #ifdef ARCH_WINDOWS
     if (_kbhit()) {
@@ -77,20 +86,12 @@ int os_getchar_nowait(char *ch) {
     #endif // ARCH_WINDOWS
 }
 
-#ifdef ARCH_MACOSX
-static struct termios _term_norm;
-static struct termios _term_raw;
-static int _fd_stdin;
-static int _fd_stdout;
-static uint8_t _term_initialized = 0;
-#endif // ARCH_MACOSX
-
 void os_putchar_nowait(char ch) {
     #ifdef ARCH_WINDOWS
     putchar(ch);
 
     #elif defined ARCH_MACOSX
-    write(_fd_stdout, &ch, 1)
+    write(_fd_stdout, &ch, 1);
 
     #else
     #pragma message("### not implemented")
