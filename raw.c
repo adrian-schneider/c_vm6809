@@ -1,6 +1,8 @@
 #include <sys/ioctl.h>
 #include <termios.h>
 #include <stdio.h>
+#include <ctype.h>
+#include <unistd.h>
 
 static struct termios _term_norm;
 static struct termios _term_raw;
