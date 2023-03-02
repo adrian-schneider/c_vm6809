@@ -79,6 +79,9 @@ void tio_init(void) {
 /* Usually implemented by the CPU. */
 static void _cpusendc(char cc) {
     mem_wr8(TIO_ADDR_THR, cc);
+#ifdef DEBUG_VM6809
+    printf("\nDBG:cpusendc '%c'", cc);
+#endif // DEBUG_VM6809
 }
 
 /* Usually implemented by the CPU. */
@@ -86,6 +89,9 @@ static uint8_t _cpurecvc(char *cc) {
     uint8_t full = mem_rd8(TIO_ADDR_LSR)&xxr_rbr_full;
     if (full) {
         *cc = mem_rd8(TIO_ADDR_RBR);
+#ifdef DEBUG_VM6809
+        printf("\nDBG:cpurecvc '%c'", *cc);
+#endif // DEBUG_VM6809
     }
     return full;
 }
@@ -134,5 +140,5 @@ static void _internal_loopback(void) {
 void tio_exec(void) {
     _recvc();
     _sendc();
-    //_internal_loopback();
+    _internal_loopback();
 }

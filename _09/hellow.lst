@@ -1,0 +1,30 @@
+                      * hellow.asm
+                      *
+                      * Print "hello, world!" to the console
+                      
+FF00                  TIO_RBR       equ $FF00
+FF00                  TIO_THR       equ $FF00
+FF01                  TIO_LSR       equ $FF01
+                      
+0040                  LSR_THR_EMPTY equ  64
+0080                  LSR_RBR_FULL  equ 128
+                      
+4000                          org $4000
+                      
+4000  318C12                  leay hello,pcr
+4003                  more
+4003  A6A0                    lda ,y+
+4005  2706                    beq finish
+                              
+4007  B7FF00                  sta TIO_THR
+400A  7E4003                  jmp more
+                              
+400D                  finish
+400D  12                      nop
+400E  12                      nop
+400F                  loop
+400F  010000                  fcb 1,0,0
+4012  7E400F                  jmp loop
+                              
+4015                  hello
+4015  48656C6C6F2C20576F726C642100         fcb "Hello, World!",0

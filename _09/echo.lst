@@ -1,0 +1,29 @@
+                      * echo.asm
+                      *
+                      * Read a character from the keyboard and echo it to the console
+                      
+FF00                  TIO_RBR       equ $FF00
+FF00                  TIO_THR       equ $FF00
+FF01                  TIO_LSR       equ $FF01
+                      
+0040                  LSR_THR_EMPTY equ  64
+0080                  LSR_RBR_FULL  equ 128
+                      
+4000                          org $4000
+                              
+4000  10CE2000                lds #$2000              ; system stack
+                      
+4004                  getdata
+4004  B6FF01                  lda TIO_LSR             ; get line status
+4007  8480                    anda #LSR_RBR_FULL      ; test for data
+4009  27F9                    beq getdata             ;   no data
+400B  F6FF00                  ldb TIO_RBR             ; read data byte
+                      
+400E  B6FF01                  lda TIO_LSR             ; get line status
+4011  8440                    anda #LSR_THR_EMPTY     ; test can send
+4013  27EF                    beq getdata             ;   can't send, continue
+4015  F7FF00                  stb TIO_THR             ; send data byte
+                              
+4018  7E4004                  jmp getdata
+                              
+                              
