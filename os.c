@@ -79,7 +79,7 @@ int os_getchar_nowait(char *ch) {
     return 0;
 
     #elif defined ARCH_MACOSX
-    return read(_fd_stdin, &ch, 1) == 1;
+    return read(_fd_stdin, ch, 1) == 1;
 
     #else
     #pragma message("### not implemented")
