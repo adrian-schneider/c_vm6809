@@ -9,6 +9,10 @@
 #include "vm6809.h"
 #include "vmmemory.h"
 
+cpu_machine_status cpu_status;
+cpu_registers_6809 cpu_regs;
+
+
 typedef enum cpu_opcode_6809 {
     op_neg_d=0x00
     ,op_neg_n=0x60

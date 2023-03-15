@@ -24,7 +24,7 @@ typedef struct monitor_state {
     char l_dftpath[CMD_LINE_LENGTH];
 } monitor_state;
 
-monitor_state monitor;
+extern monitor_state monitor;
 
 void mon_init(void);
 void mon_printreg(void);
@@ -38,7 +38,6 @@ void mon_listdir(char *path);
 void mon_setfile(char *file);
 void mon_getexepath(char *path, char *exepath, size_t size);
 void mon_getpath(char *path, size_t size);
-void mon_trap_on_sigint(void);
 void mon_execmon(void);
 
 #endif // _VMMONITOR_H_

@@ -8,7 +8,7 @@
 #include <conio.h>
 #endif // ARCH_WINDOWS
 
-#ifdef ARCH_MACOSX
+#if defined ARCH_MACOSX || defined ARCH_LINUX
 #include <termios.h>
 #include <sys/ioctl.h>
 #include <unistd.h>
@@ -25,7 +25,7 @@ int _vsprintf(char *buf, size_t bufsize, const char* fmt, va_list argp) {
     #ifdef ARCH_WINDOWS
     return vsprintf_s(buf, bufsize, fmt, argp);
 
-    #elif defined ARCH_MACOSX
+    #elif defined ARCH_MACOSX || defined ARCH_LINUX
     return vsnprintf(buf, bufsize, fmt, argp);
 
     #else
@@ -62,7 +62,7 @@ void os_clear_input() {
     #endif // ARCH_WINDOWS
 }
 
-#ifdef ARCH_MACOSX
+#if defined ARCH_MACOSX || defined ARCH_LINUX
 static struct termios _term_norm;
 static struct termios _term_raw;
 static int _fd_stdin;
@@ -78,7 +78,7 @@ int os_getchar_nowait(char *ch) {
     }
     return 0;
 
-    #elif defined ARCH_MACOSX
+    #elif defined ARCH_MACOSX || defined ARCH_LINUX
     return read(_fd_stdin, ch, 1) == 1;
 
     #else
@@ -90,7 +90,7 @@ void os_putchar_nowait(char ch) {
     #ifdef ARCH_WINDOWS
     putchar(ch);
 
-    #elif defined ARCH_MACOSX
+    #elif defined ARCH_MACOSX || defined ARCH_LINUX
     write(_fd_stdout, &ch, 1);
 
     #else
@@ -98,7 +98,7 @@ void os_putchar_nowait(char ch) {
     #endif // ARCH_WINDOWS
 }
 
-#ifdef ARCH_MACOSX
+#if defined ARCH_MACOSX || defined ARCH_LINUX
 static void _init_term(void) {
     if (! _term_initialized) {
         _fd_stdin = fileno(stdin);

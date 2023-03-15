@@ -82,9 +82,7 @@ int main(int argc, char *argv[])
         if (main_perform_tio)
             tio_exec();
         cpu_execirq();
-        mon_trap_on_sigint();
-        if (cpu_regs._trap)
-            mon_execmon();
+        mon_execmon();
         cpu_execop();
     }
     printf("\n");

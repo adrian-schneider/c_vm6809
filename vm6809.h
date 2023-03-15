@@ -32,7 +32,7 @@ typedef struct cpu_machine_status {
     cpu_status_code code;
 } cpu_machine_status;
 
-cpu_machine_status cpu_status;
+extern cpu_machine_status cpu_status;
 
 typedef struct cpu_registers_6809 {
     uint16_t x;
@@ -53,7 +53,7 @@ typedef struct cpu_registers_6809 {
     uint8_t _trap; /* CPU status and monitor control. */
 } cpu_registers_6809;
 
-cpu_registers_6809 cpu_regs;
+extern cpu_registers_6809 cpu_regs;
 
 typedef enum cpu_ccflags_6809 {
     cc_e=128, cc_f=64, cc_h=32, cc_i=16, cc_n=8, cc_z=4, cc_v=2, cc_c=1

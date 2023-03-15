@@ -1,10 +1,6 @@
 #ifndef _OS_H_
 #define _OS_H_
 
-#include <stdarg.h>
-#include <stdint.h>
-#include <ctype.h>
-
 #undef ARCH_WINDOWS
 #undef ARCH_LINUX
 #undef ARCH_MACOSX
@@ -24,6 +20,14 @@
 #pragma message("### Building for Apple MacOSX.")
 #endif // __APPLE__
 
+
+#include <stdarg.h>
+#include <stdint.h>
+#include <ctype.h>
+
+#ifdef ARCH_LINUX
+#include <stddef.h>
+#endif // ARCH_LINUX
 
 void os_sprintf(char *buf, size_t bufsize, const char* fmt, ...);
 void os_clear_screen(void);

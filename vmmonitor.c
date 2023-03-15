@@ -27,6 +27,8 @@
 #define MON_CLEAR_BREAKPOINT 0
 #define MON_SET_BREAKPOINT 1
 
+monitor_state monitor;
+
 typedef enum _breakpoint_status {
     bps_enabled=128, bps_set=64
 } _breakpoint_status;
@@ -583,11 +585,11 @@ static void _setclr_breakpoint(uint16_t addr, uint8_t setclr) {
         }
         breakpoint[bpindx].status &= ~(bps_set|bps_enabled);
     }
-    printf("  %c%01d:%04x%c\n"
-           , (breakpoint[bpindx].status&bps_set)?'+':'-'
+    printf("  %01d:%04x %s %s\n"
            , bpindx
            , addr
-           , (breakpoint[bpindx].status%bps_enabled)?'*':' '
+           , (breakpoint[bpindx].status&bps_set)?"set ":"free"
+           , (breakpoint[bpindx].status%bps_enabled)?"enabled ":"disabled"
     );
 }
 
@@ -596,21 +598,21 @@ static void _toggle_breakpoint(uint16_t addr) {
     if (bpindx > -1) {
         breakpoint[bpindx].status ^= bps_enabled;
         breakpoint[bpindx].status |= bps_set;
-        printf("  ~%01d:%04x%c\n"
+        printf("  %01d:%04x %s\n"
                , bpindx
                , addr
-               , (breakpoint[bpindx].status&bps_enabled)?'*':' '
+               , (breakpoint[bpindx].status&bps_enabled)?"enabled":"disabled"
         );
     }
 }
 
 static void _list_breakpoints(void) {
     for (uint8_t ii=0; ii < MON_NUMBER_OF_BREAKPOINTS; ii++) {
-        printf("  %c%01d:%04x%c\n"
-               , (breakpoint[ii].status&bps_set)?' ':'.'
+        printf("  %01d:%04x %s %s\n"
                , ii
                , breakpoint[ii].address
-               , (breakpoint[ii].status&bps_enabled)?'*':' '
+               , (breakpoint[ii].status&bps_set)?"set ":"free"
+               , (breakpoint[ii].status&bps_enabled)?"enabled ":"disabled"
         );
     }
 }
@@ -818,11 +820,6 @@ void mon_getpath(char *path, size_t size) {
     }
 }
 
-void mon_trap_on_sigint(void) {
-    if (_sigint_received)
-        cpu_regs._trap |= tc_halt;
-}
-
 extern int main_perform_tio;
 
 void mon_execmon(void) {
@@ -838,6 +835,7 @@ void mon_execmon(void) {
     }
 
     if (_sigint_received) {
+        cpu_regs._trap |= tc_halt;
         _sigint_received = 0;
         brkcode = 'H';
     }

@@ -66,7 +66,7 @@
 	<stdlib.h>
 	<conio.h>
 
-1677400888 source:c:\users\asc\documents\c_vm6809\main.c
+1678618446 source:c:\users\asc\documents\c_vm6809\main.c
 	<stdio.h>
 	<stdlib.h>
 	<stdint.h>
@@ -78,20 +78,21 @@
 	"vmmonitor.h"
 	"vmtermio.h"
 
-1677609655 c:\users\asc\documents\c_vm6809\os.h
+1678814163 c:\users\asc\documents\c_vm6809\os.h
 	<stdarg.h>
 	<stdint.h>
 	<ctype.h>
+	<stddef.h>
 
-1677337749 c:\users\asc\documents\c_vm6809\vm6809.h
+1678897299 c:\users\asc\documents\c_vm6809\vm6809.h
 
-1677337749 c:\users\asc\documents\c_vm6809\vmmemory.h
+1678897369 c:\users\asc\documents\c_vm6809\vmmemory.h
 
-1677353539 c:\users\asc\documents\c_vm6809\vmmonitor.h
+1678865506 c:\users\asc\documents\c_vm6809\vmmonitor.h
 
 1677337749 c:\users\asc\documents\c_vm6809\vmtermio.h
 
-1677697012 source:c:\users\asc\documents\c_vm6809\os.c
+1678814059 source:c:\users\asc\documents\c_vm6809\os.c
 	"os.h"
 	<stdio.h>
 	<string.h>
@@ -101,7 +102,7 @@
 	<sys/ioctl.h>
 	<unistd.h>
 
-1677337749 source:c:\users\asc\documents\c_vm6809\vm6809.c
+1678897297 source:c:\users\asc\documents\c_vm6809\vm6809.c
 	<stdio.h>
 	<stdlib.h>
 	<stdint.h>
@@ -109,13 +110,13 @@
 	"vm6809.h"
 	"vmmemory.h"
 
-1677337749 source:c:\users\asc\documents\c_vm6809\vmmemory.c
+1678897369 source:c:\users\asc\documents\c_vm6809\vmmemory.c
 	<stdint.h>
 	<string.h>
 	"vmmemory.h"
 	"vmtermio.h"
 
-1677399966 source:c:\users\asc\documents\c_vm6809\vmmonitor.c
+1678897134 source:c:\users\asc\documents\c_vm6809\vmmonitor.c
 	<stdint.h>
 	<signal.h>
 	<stdlib.h>
@@ -127,7 +128,7 @@
 	"vm6809.h"
 	"vmmemory.h"
 
-1677778762 source:c:\users\asc\documents\c_vm6809\vmtermio.c
+1678618181 source:c:\users\asc\documents\c_vm6809\vmtermio.c
 	<stdint.h>
 	<ctype.h>
 	<stdio.h>

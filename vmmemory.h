@@ -4,7 +4,7 @@
 #define MEMORY_SIZE 64*1024
 #define EYECATCHER_16 0x5555
 
-uint8_t memory[MEMORY_SIZE];
+extern uint8_t memory[MEMORY_SIZE];
 
 void mem_init(void);
 void mem_erase(uint8_t data);

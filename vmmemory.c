@@ -4,6 +4,8 @@
 #include "vmmemory.h"
 #include "vmtermio.h"
 
+uint8_t memory[MEMORY_SIZE];
+
 void mem_init(void) {
     mem_erase(0);
 }
