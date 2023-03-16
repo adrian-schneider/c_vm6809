@@ -649,16 +649,17 @@ static void _execcmd_question(char *cmdline) {
             puts("Commands");
             puts("  b    Break points.");
             puts("  g    Program execution.");
-            puts("  r    Register operation.");
-            puts("  t    Tracing control.");
-            puts("  s    Single stepping.");
             puts("  i    Interrupt control and reset.");
-            puts("  l    File loading commands.");
+            puts("  l    File management.");
+            puts("  m    Memory inspection.");
+            puts("  r    Register operations.");
+            puts("  s    Single stepping control.");
+            puts("  t    Tracing control.");
             puts("  ?X   Show help for the X command.");
             puts("  bye  End the simulator.");
             break;
         case 'b':
-            puts("b: Break point commands.");
+            puts("b: Break points.");
             puts("  b       List break points (there are four).");
             puts("          Format .N:XXXX* N:number, XXXX:address.");
             puts("          '.' position is free.");
@@ -668,31 +669,31 @@ static void _execcmd_question(char *cmdline) {
             puts("  b*XXXX  Toggle break point at address XXXX.");
             break;
         case 'g':
-            puts("g: Go/run commands.");
+            puts("g: Program execution.");
             puts("  g      Continue from current PC.");
             puts("  gXXXX  Restart from XXXX.");
             puts("  Hit ctrl-c to return to the monitor.");
             break;
         case 'r':
-            puts("r: Register commands.");
+            puts("r: Register operations.");
             puts("  r   Print registers short.");
             puts("  r?  Print registers full.");
             puts("  rR  Print register content and allow modification.");
             puts("  R: a, b, c=cc, d, p=dp, x, y, u, s");
             break;
         case 't':
-            puts("t: Tracing commands.");
+            puts("t: Tracing control.");
             puts("  t   Show tracing status.");
             puts("  t!  Begin tracing mode.");
             puts("  t.  End tracing mode.");
             break;
         case 's':
-            puts("s: Single stepping commands.");
+            puts("s: Single stepping control.");
             puts("  s      Single step from current PC.");
             puts("  sXXXX  Restart single stepping from XXXX.");
             break;
         case 'm':
-            puts("m: Memory commands.");
+            puts("m: Memory inspection.");
             puts("  mXXXX  Show memory byte at address XXXX.");
             puts("  m:XXXX Show memory byte at the PC.");
             puts("  m:@    Show memory word at the PC.");
@@ -709,14 +710,14 @@ static void _execcmd_question(char *cmdline) {
             puts("  mv     Show the vector table.");
             break;
         case 'i':
-            puts("i: Interrupt commands.");
+            puts("i: Interrupt control and reset.");
             puts("  i?   Show interrupt flags.");
             puts("  i!X  Set interrupt X.");
             puts("  i.X  Cleaar X interrupt X.");
             puts("  X: r=reset, n=nmi, f=firq, i=irq, s=swi, 2=swi2, 3=swi3");
             break;
         case 'l':
-            puts("l: File loading commands.");
+            puts("l: File management.");
             puts("  lNAME Load the file NAME to the start address");
             puts("        and set the reset vector accordingly.");
             puts("  l*    Reload the previous file.");

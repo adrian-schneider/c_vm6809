@@ -35,7 +35,7 @@ void os_clear_input();
 int os_getchar_nowait(char *ch);
 void os_putchar_nowait(char ch);
 
-#ifdef ARCH_MACOSX
+#if defined ARCH_MACOSX || defined ARCH_LINUX
 #define OS_TERM_RAW os_term_raw()
 void os_term_raw(void);
 
