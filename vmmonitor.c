@@ -711,7 +711,7 @@ static void _execcmd_question(char *cmdline) {
             break;
         case 'i':
             puts("i: Interrupt control and reset.");
-            puts("  i?   Show interrupt flags.");
+            puts("  i    Show interrupt flags.");
             puts("  i!X  Set interrupt X.");
             puts("  i.X  Cleaar X interrupt X.");
             puts("  X: r=reset, n=nmi, f=firq, i=irq, s=swi, 2=swi2, 3=swi3");

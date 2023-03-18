@@ -1,0 +1,46 @@
+                      * echoirq.asm
+                      *
+                      * Read a character from the keyboard and echo it to the console
+                      
+FF00                  TIO_RBR       equ $FF00
+FF00                  TIO_THR       equ $FF00
+FF01                  TIO_LSR       equ $FF01
+FF02                  TIO_IER       equ $FF02
+FF03                  TIO_IIR       equ $FF03
+FF04                  TIO_LCR       equ $FF04
+                      
+0040                  XXR_THR_EMPTY equ  64
+0080                  XXR_RBR_FULL  equ 128
+                      
+FFF8                  IRQVECTOR     equ $FFF8
+                      
+4000                          org $4000
+                              
+4000  10CE2000                lds #$2000              ; system stack
+                              
+4004  CC4015                  ldd #irqhandler         ; setup irq handler
+4007  FDFFF8                  std IRQVECTOR
+                              
+400A  8680                    lda #XXR_RBR_FULL       ; interrupt on data available
+400C  B7FF02                  sta TIO_IER
+                      
+400F                  getdata
+400F  12                      nop
+4010  12                      nop
+4011  12                      nop
+4012  7E400F                  jmp getdata
+                              
+4015                  irqhandler
+4015  B6FF03                  lda TIO_IIR             ; interrupt identification
+4018  B40080                  anda XXR_RBR_FULL       ; data available?
+401B  270D                    beq irdone              ;   no data
+401D  F6FF00                  ldb TIO_RBR             ; load data
+                      
+4020  B6FF01                  lda TIO_LSR             ; get line status
+4023  8440                    anda #XXR_THR_EMPTY     ; test can send
+4025  2703                    beq irdone              ;   can't send, continue
+4027  F7FF00                  stb TIO_THR             ; send data byte
+402A                  irdone
+402A  3B                      rti
+                              
+                              
