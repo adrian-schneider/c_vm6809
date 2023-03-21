@@ -32,15 +32,15 @@ FFF8                  IRQVECTOR     equ $FFF8
                               
 4015                  irqhandler
 4015  B6FF03                  lda TIO_IIR             ; interrupt identification
-4018  B40080                  anda XXR_RBR_FULL       ; data available?
-401B  270D                    beq irdone              ;   no data
-401D  F6FF00                  ldb TIO_RBR             ; load data
+4018  8480                    anda #XXR_RBR_FULL      ; data available?
+401A  270D                    beq irdone              ;   no data
+401C  F6FF00                  ldb TIO_RBR             ; load data
                       
-4020  B6FF01                  lda TIO_LSR             ; get line status
-4023  8440                    anda #XXR_THR_EMPTY     ; test can send
-4025  2703                    beq irdone              ;   can't send, continue
-4027  F7FF00                  stb TIO_THR             ; send data byte
-402A                  irdone
-402A  3B                      rti
+401F  B6FF01                  lda TIO_LSR             ; get line status
+4022  8440                    anda #XXR_THR_EMPTY     ; test can send
+4024  2703                    beq irdone              ;   can't send, continue
+4026  F7FF00                  stb TIO_THR             ; send data byte
+4029                  irdone
+4029  3B                      rti
                               
                               
